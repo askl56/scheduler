@@ -6,11 +6,11 @@ class HomeController < ApplicationController
 
     events = Event.all
 
-    render :json => events.map {|event| {
-              :id => event.id,
-              :start_date => event.start_date.to_formatted_s(:db),
-              :end_date => event.end_date.to_formatted_s(:db),
-              :text => event.text
+    render json: events.map {|event| {
+              id: event.id,
+              start_date: event.start_date.to_formatted_s(:db),
+              end_date: event.end_date.to_formatted_s(:db),
+              text: event.text
           }}
 
   end
@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 
    case mode
      when "inserted"
-       event = Event.create :start_date => start_date, :end_date => end_date, :text => text
+       event = Event.create start_date: start_date, end_date: end_date, text: text
        tid = event.id
 
      when "deleted"
@@ -40,10 +40,10 @@ class HomeController < ApplicationController
        tid = id
    end
 
-   render :json => {
-              :type => mode,
-              :sid => id,
-              :tid => tid,
+   render json: {
+              type: mode,
+              sid: id,
+              tid: tid,
           }
  end
 end
